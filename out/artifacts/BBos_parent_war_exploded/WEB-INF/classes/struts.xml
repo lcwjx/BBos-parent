@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <!--&lt;!&ndash; 指定由spring负责action对象的创建 &ndash;&gt;-->
+    <constant name="struts.objectFactory" value="spring" />
+    <!--&lt;!&ndash; 所有匹配*.action的请求都由struts2处理 &ndash;&gt;-->
+    <!--<constant name="struts.action.extension" value="action" />-->
+    <!--&lt;!&ndash; 是否启用开发模式(开发时设置为true,发布到生产环境后设置为false) &ndash;&gt;-->
+    <constant name="struts.devMode" value="false" />
+    <!--&lt;!&ndash; struts配置文件改动后，是否重新加载(开发时设置为true,发布到生产环境后设置为false) &ndash;&gt;-->
+    <!--<constant name="struts.configuration.xml.reload" value="true" />-->
+    <!--&lt;!&ndash; 设置浏览器是否缓存静态内容(开发时设置为false,发布到生产环境后设置为true) &ndash;&gt;-->
+    <!--<constant name="struts.serve.static.browserCache" value="false" />-->
+    <!--&lt;!&ndash; 请求参数的编码方式 &ndash;&gt;-->
+    <!--<constant name="struts.i18n.encoding" value="utf-8" />-->
+    <!--&lt;!&ndash; 每次HTTP请求系统都重新加载资源文件，有助于开发(开发时设置为true,发布到生产环境后设置为false) &ndash;&gt;-->
+    <!--<constant name="struts.i18n.reload" value="true" />-->
+    <!--&lt;!&ndash; 文件上传最大值 &ndash;&gt;-->
+    <!--<constant name="struts.multipart.maxSize" value="104857600" />-->
+    <!--&lt;!&ndash; 让struts2支持动态方法调用,使用叹号访问方法 &ndash;&gt;-->
+    <!--<constant name="struts.enable.DynamicMethodInvocation" value="true" />-->
+    <!--&lt;!&ndash; Action名称中是否还是用斜线 &ndash;&gt;-->
+    <!--<constant name="struts.enable.SlashesInActionNames" value="false" />-->
+    <!--&lt;!&ndash; 允许标签中使用表达式语法 &ndash;&gt;-->
+    <!--<constant name="struts.tag.altSyntax" value="true" />-->
+    <!--&lt;!&ndash; 对于WebLogic,Orion,OC4J此属性应该设置成true &ndash;&gt;-->
+    <!--<constant name="struts.dispatcher.parametersWorkaround" value="false" />-->
+
+    <package name="bos" namespace="/" extends="struts-default">
+        <!-- 需要进行权限控制的页面访问 -->
+        <action name="page_*_*">
+            <result type="dispatcher">/pages/{1}/{2}.jsp</result>
+        </action>
+        <action name="userAction_*" method="{1}" class="userAction">
+            <result name="login">/login.jsp</result>
+            <result name="home">/index.jsp</result>
+        </action>
+    </package>
+
+</struts>
