@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * User entity. @author MyEclipse Persistence Tools
  */
+
 public class User implements java.io.Serializable {
 
 	// Fields

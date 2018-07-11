@@ -10,10 +10,28 @@
     <script type="text/javascript" src="${pageContext.request.contextPath }/js/easyui/jquery.easyui.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/js/ztree/zTreeStyle.css" type="text/css">
     <script type="text/javascript" src="${pageContext.request.contextPath }/js/ztree/jquery.ztree.all-3.5.js"></script>
+    <script type="text/javascript">
+        $(function () {
+                $.messager.show({
+                    title:"标题",
+                    msg:"内容",
+                    timeout:5000,
+                    showType:'show'
+                });
+        });
+
+    </script>
 </head>
 <body class="easyui-layout">
 
-<div title="管理系统" style="height: 100px" data-options="region:'north'"> 头布局</div>
+<div title="管理系统" style="height: 100px" data-options="region:'north'">
+    <a id="control_panel" class="easyui-menubutton" data-options="menu:'#control_panel_menu'">控制面板</a>
+    <div id="control_panel_menu">
+        <div data-options="iconCls:'icon-edit'">修改密码</div>
+        <div>联系管理员</div>
+        <div>退出登录</div>
+    </div>
+</div>
 <div title="菜单系统" style="width: 200px" data-options="region:'west'">
     <div class="easyui-accordion" data-options="fit:true">
         <div title="ZTree" data-options="iconCls:'icon-cut'">

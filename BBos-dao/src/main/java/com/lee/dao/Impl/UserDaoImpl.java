@@ -3,6 +3,8 @@ package com.lee.dao.Impl;
 import com.lee.dao.IUserDao;
 import com.lee.dao.base.impl.BaseDaoImpl;
 import com.lee.domain.User;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

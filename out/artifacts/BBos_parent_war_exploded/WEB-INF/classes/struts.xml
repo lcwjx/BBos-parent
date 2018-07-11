@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 
     <!--&lt;!&ndash; 指定由spring负责action对象的创建 &ndash;&gt;-->
-    <constant name="struts.objectFactory" value="spring" />
+    <constant name="struts.objectFactory" value="spring"/>
     <!--&lt;!&ndash; 所有匹配*.action的请求都由struts2处理 &ndash;&gt;-->
     <!--<constant name="struts.action.extension" value="action" />-->
     <!--&lt;!&ndash; 是否启用开发模式(开发时设置为true,发布到生产环境后设置为false) &ndash;&gt;-->
-    <constant name="struts.devMode" value="false" />
+    <constant name="struts.devMode" value="false"/>
     <!--&lt;!&ndash; struts配置文件改动后，是否重新加载(开发时设置为true,发布到生产环境后设置为false) &ndash;&gt;-->
     <!--<constant name="struts.configuration.xml.reload" value="true" />-->
     <!--&lt;!&ndash; 设置浏览器是否缓存静态内容(开发时设置为false,发布到生产环境后设置为true) &ndash;&gt;-->
@@ -28,13 +29,40 @@
     <!--<constant name="struts.dispatcher.parametersWorkaround" value="false" />-->
 
     <package name="bos" namespace="/" extends="struts-default">
+        <!--注册拦截器-->
+        <interceptors>
+            <interceptor name="loginInterceptor" class="com.lee.web.interceptor.LoginInterceptor">
+                <!--设置不需要拦截的方法-->
+                <param name="excludeMethods">login</param>
+            </interceptor>
+            <!--定义拦截器栈-->
+            <interceptor-stack name="bosStack">
+                <interceptor-ref name="loginInterceptor"></interceptor-ref>
+                <!--默认拦截器栈-->
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <!--设置默认拦截器栈-->
+        <default-interceptor-ref name="bosStack"/>
+        <!--全局结果集-->
+        <global-results>
+            <result name="login">/login.jsp</result>
+        </global-results>
         <!-- 需要进行权限控制的页面访问 -->
         <action name="page_*_*">
             <result type="dispatcher">/pages/{1}/{2}.jsp</result>
         </action>
         <action name="userAction_*" method="{1}" class="userAction">
-            <result name="login">/login.jsp</result>
+
             <result name="home">/index.jsp</result>
+        </action>
+        <action name="staffAction_*" method="{1}" class="staffAction">
+            <result name="list">/pages/base/staff.jsp</result>
+        </action>
+        <action name="regionAction_*" method="{1}" class="regionAction">
+        </action>
+        <action name="subareaAction_*" method="{1}" class="subareaAction">
+            <result name="list">/pages/base/subarea.jsp</result>
         </action>
     </package>
 
