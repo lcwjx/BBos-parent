@@ -78,7 +78,7 @@ public class RegionAction extends BaseAction<Region> {
      */
     public String pageQuery() throws Exception {
         regionService.pageQuery(pageBean);
-        this.objectConvertJson(pageBean);
+        this.objectConvertJson(pageBean,new String[]{"currentPage","detachedCriteria","pageSize","subareas"});
         return NONE;
     }
 
@@ -96,7 +96,7 @@ public class RegionAction extends BaseAction<Region> {
         } else {
             list =  regionService.findAll();
         }
-        this.objectConvertJson(list);
+        this.objectConvertJson(list,new String[]{"subareas"});
         return NONE;
     }
 }

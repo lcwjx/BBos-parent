@@ -1,16 +1,12 @@
 package com.lee.utils;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.List;
 
 public class PageBean {
-    @JSONField(serialize = false)
     private int currentPage;//当前页码
-    @JSONField(serialize = false)
     private int pageSize;//每页显示的记录数
-    @JSONField(serialize = false)
     private DetachedCriteria detachedCriteria;//查询条件
     private int total;//总记录数
     private List rows;//当前页需要展示的数据集合

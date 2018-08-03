@@ -7,7 +7,9 @@ import com.lee.web.action.base.BaseAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
 import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -34,7 +36,7 @@ public class StaffAction extends BaseAction<Staff> {
      */
     public String pageQuery() throws IOException {
         staffService.pageQuery(pageBean);
-        this.objectConvertJson(pageBean);
+        this.objectConvertJson(pageBean, new String[]{"decidedzones","currentPage","detachedCriteria","pageSize"});
         return NONE;
     }
 
@@ -73,5 +75,16 @@ public class StaffAction extends BaseAction<Staff> {
         staff.setStandard(model.getStandard());
         staffService.update(staff);
         return LIST;
+    }
+
+    /**
+     * 查询所有未删除的取派员
+     *
+     * @return
+     */
+    public String listAjax() {
+        List<Staff> list = staffService.findListNotDelete();
+        this.objectConvertJson(list, new String[]{"decidedzones"});
+        return NONE;
     }
 }

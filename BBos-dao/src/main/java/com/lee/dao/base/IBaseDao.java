@@ -1,6 +1,7 @@
 package com.lee.dao.base;
 
 import com.lee.utils.PageBean;
+import org.hibernate.criterion.DetachedCriteria;
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,4 +23,5 @@ public interface IBaseDao<T> {
 
     void saveOrUpdate(T entity);
 
+    List<T> findByCriteria(DetachedCriteria detachedCriteria);
 }
